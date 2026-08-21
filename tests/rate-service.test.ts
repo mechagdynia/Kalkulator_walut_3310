@@ -100,6 +100,26 @@ describe('getRates', () => {
     expect(JSON.parse(localStorage.getItem('waluta3310:rates:crypto:BTC') ?? '{}').source).toBe('Coinbase');
   });
 
+  it('przelicza walutę bazową na krypto przez rzeczywisty kurs USD', async () => {
+    vi.mocked(fetch)
+      .mockResolvedValueOnce(response({ data: { rates: { BTC: '0.00002', ETH: '0.0005', USDT: '1.001' } } }))
+      .mockResolvedValueOnce(response([{ rates: [{ code: 'USD', mid: 4 }, { code: 'EUR', mid: 5 }] }]))
+      .mockResolvedValueOnce(response([{ rates: [{ code: 'AFN', mid: 0.05 }] }]));
+    const result = await getRates('PLN', true, 'mixed', 'PLN');
+    expect(result.source).toBe('Coinbase + NBP A+B');
+    expect(result.rates).toMatchObject({ PLN: 1, BTC: 0.000005, ETH: 0.000125, USDT: 0.25025 });
+    expect(JSON.parse(localStorage.getItem('waluta3310:rates:mixed:PLN:PLN') ?? '{}').source).toBe('Coinbase + NBP A+B');
+  });
+
+  it('przelicza krypto bazowe na wybraną walutę przez USD', async () => {
+    vi.mocked(fetch)
+      .mockResolvedValueOnce(response({ data: { rates: { BTC: '1', ETH: '18', USDT: '60000', USD: '60000' } } }))
+      .mockResolvedValueOnce(response([{ rates: [{ code: 'USD', mid: 4 }, { code: 'EUR', mid: 5 }] }]))
+      .mockResolvedValueOnce(response([{ rates: [{ code: 'AFN', mid: 0.05 }] }]));
+    const result = await getRates('BTC', true, 'mixed', 'PLN');
+    expect(result.rates).toMatchObject({ BTC: 1, ETH: 18, USDT: 60000, PLN: 240000 });
+  });
+
   it('odrzuca nieprawidłowy kod bazy przed połączeniem', async () => {
     await expect(getRates('../', true)).rejects.toThrow('Nieprawidłowy kod waluty');
     expect(fetch).not.toHaveBeenCalled();

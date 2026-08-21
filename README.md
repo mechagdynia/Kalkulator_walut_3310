@@ -17,6 +17,7 @@ Currency Calculator 3310 combines a full calculator with simultaneous currency a
 - Convert between 2 and 8 currencies at the same time.
 - Browse all 149 currencies currently covered by NBP tables A and B, with search, local Flagpedia flags and symbols.
 - Use a separate Crypto tab with 30 popular cryptocurrencies and Coinbase rates.
+- Use the Fiat/Crypto tab to keep one chosen fiat currency at the top and compare it with 1–7 crypto assets in either direction.
 - Switch the application between Polish and English; the first language is detected from the device.
 - Use a full calculator directly connected to the base amount.
 - Switch between persistent Retro LCD and Modern UI themes.
@@ -85,3 +86,5 @@ React 19 · TypeScript · Vite · Capacitor 8 · Vitest · Testing Library · PW
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 
 Exchange rates are informational and may be delayed. This application does not provide financial advice.
+
+USDT is designed to track USD at a 1:1 peg, but the app always displays the current market rate instead of assuming that both assets have identical value.

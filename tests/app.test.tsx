@@ -22,8 +22,10 @@ describe('App', () => {
     localStorage.setItem('waluta3310:assetMode', JSON.stringify('fiat'));
     localStorage.setItem('waluta3310:currencies', JSON.stringify(['PLN', 'EUR', 'USD', 'GBP', 'NOK', 'SEK']));
     localStorage.setItem('waluta3310:cryptoCurrencies', JSON.stringify(['BTC', 'ETH', 'USDT', 'BNB', 'SOL', 'XRP']));
+    localStorage.setItem('waluta3310:mixedAssets', JSON.stringify(['USD', 'BTC', 'ETH', 'USDT', 'BNB', 'SOL']));
     localStorage.setItem('waluta3310:base', JSON.stringify('PLN'));
     localStorage.setItem('waluta3310:cryptoBase', JSON.stringify('BTC'));
+    localStorage.setItem('waluta3310:mixedBase', JSON.stringify('USD'));
     localStorage.setItem('waluta3310:expression', JSON.stringify('100'));
     getRatesMock.mockResolvedValue(snapshot);
   });
@@ -144,6 +146,29 @@ describe('App', () => {
     expect(screen.getByRole('region', { name: 'Przeliczone kryptowaluty' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Bitcoin/ })).toHaveAttribute('aria-pressed', 'true');
     expect(getRatesMock).toHaveBeenCalledWith('BTC', false, 'crypto');
+  });
+
+  it('łączy jedną walutę na górze z kryptowalutami i pozwala ją zmienić', async () => {
+    const mixedSnapshot = {
+      base: 'USD',
+      rates: { USD: 1, BTC: 0.000015, ETH: 0.0004, USDT: 0.999, BNB: 0.0015, SOL: 0.006 },
+      fetchedAt: Date.now(),
+      source: 'Coinbase + NBP A+B',
+      stale: false
+    };
+    getRatesMock.mockImplementation((base: string, _force: boolean, mode: string) => Promise.resolve(mode === 'mixed' ? { ...mixedSnapshot, base } : snapshot));
+    const user = userEvent.setup();
+    render(<App />);
+    await user.click(screen.getByRole('button', { name: 'WALUTY/KRYPTO' }));
+    expect(await screen.findByText(/ONLINE · Coinbase \+ NBP A\+B/)).toBeInTheDocument();
+    const mixedRegion = screen.getByRole('region', { name: 'Przeliczone waluty i kryptowaluty' });
+    expect(within(mixedRegion).getAllByRole('button')[1]).toHaveAccessibleName(/USD.*Dolar amerykański/);
+    expect(getRatesMock).toHaveBeenCalledWith('USD', false, 'mixed', 'USD');
+    await user.click(screen.getByRole('button', { name: 'Zmień walutę i listę kryptowalut' }));
+    const picker = within(screen.getByRole('dialog'));
+    await user.type(picker.getByPlaceholderText('Waluta lub kryptowaluta'), 'EUR');
+    await user.click(picker.getByRole('button', { name: /EUR.*Euro/ }));
+    await waitFor(() => expect(JSON.parse(localStorage.getItem('waluta3310:mixedAssets') ?? '[]')[0]).toBe('EUR'));
   });
 
   it('pilnuje zakresu od dwóch do ośmiu walut', async () => {

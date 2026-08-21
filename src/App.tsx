@@ -6,7 +6,7 @@ import { CurrencyPicker } from './components/CurrencyPicker';
 import { Keypad } from './components/Keypad';
 import { StatusBar } from './components/StatusBar';
 import { DEFAULT_CURRENCIES, currencyFromLocale } from './data/currencies';
-import { DEFAULT_CRYPTOCURRENCIES } from './data/cryptocurrencies';
+import { DEFAULT_CRYPTOCURRENCIES, isCryptoCode } from './data/cryptocurrencies';
 import { useRates } from './hooks/useRates';
 import { COPY, languageFromLocale, type Language } from './i18n';
 import { readStorage, writeStorage } from './services/storage';
@@ -27,22 +27,32 @@ export default function App() {
     const saved = readStorage<string[]>('cryptoCurrencies', []);
     return saved.length >= 2 ? saved : DEFAULT_CRYPTOCURRENCIES;
   });
+  const [mixedAssets, setMixedAssets] = useState<string[]>(() => {
+    const saved = readStorage<string[]>('mixedAssets', []);
+    const fiat = saved.find((code) => !isCryptoCode(code)) ?? 'USD';
+    const crypto = saved.filter(isCryptoCode);
+    return [fiat, ...(crypto.length ? crypto : DEFAULT_CRYPTOCURRENCIES)].slice(0, 8);
+  });
   const [fiatBase, setFiatBase] = useState(() => readStorage('base', fiatCurrencies[0]));
   const [cryptoBase, setCryptoBase] = useState(() => readStorage('cryptoBase', cryptoCurrencies[0]));
+  const [mixedBase, setMixedBase] = useState(() => readStorage('mixedBase', mixedAssets[0]));
   const [mode, setMode] = useState<AssetMode>(() => readStorage<AssetMode>('assetMode', 'fiat'));
   const [language, setLanguage] = useState<Language>(() => readStorage<Language>('language', languageFromLocale()));
   const [expression, setExpression] = useState(() => readStorage('expression', '100'));
   const [pickerOpen, setPickerOpen] = useState(false);
   const [theme, setTheme] = useState<Theme>(() => readStorage<Theme>('theme', 'retro'));
-  const currencies = mode === 'fiat' ? fiatCurrencies : cryptoCurrencies;
-  const base = mode === 'fiat' ? fiatBase : cryptoBase;
-  const { snapshot, status, error, refresh } = useRates(base, mode);
+  const currencies = mode === 'fiat' ? fiatCurrencies : mode === 'crypto' ? cryptoCurrencies : mixedAssets;
+  const base = mode === 'fiat' ? fiatBase : mode === 'crypto' ? cryptoBase : mixedBase;
+  const mixedFiat = mixedAssets.find((code) => !isCryptoCode(code)) ?? 'USD';
+  const { snapshot, status, error, refresh } = useRates(base, mode, mixedFiat);
   const amount = useMemo(() => Math.abs(evaluateExpression(expression) ?? 0), [expression]);
 
   useEffect(() => writeStorage('currencies', fiatCurrencies), [fiatCurrencies]);
   useEffect(() => writeStorage('cryptoCurrencies', cryptoCurrencies), [cryptoCurrencies]);
+  useEffect(() => writeStorage('mixedAssets', mixedAssets), [mixedAssets]);
   useEffect(() => writeStorage('base', fiatBase), [fiatBase]);
   useEffect(() => writeStorage('cryptoBase', cryptoBase), [cryptoBase]);
+  useEffect(() => writeStorage('mixedBase', mixedBase), [mixedBase]);
   useEffect(() => writeStorage('assetMode', mode), [mode]);
   useEffect(() => writeStorage('language', language), [language]);
   useEffect(() => writeStorage('expression', expression), [expression]);
@@ -55,6 +65,10 @@ export default function App() {
   useEffect(() => {
     if (!cryptoCurrencies.includes(cryptoBase)) setCryptoBase(cryptoCurrencies[0]);
   }, [cryptoBase, cryptoCurrencies]);
+
+  useEffect(() => {
+    if (!mixedAssets.includes(mixedBase)) setMixedBase(mixedAssets[0]);
+  }, [mixedAssets, mixedBase]);
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -71,7 +85,8 @@ export default function App() {
     const converted = snapshot?.rates[code] ? amount * snapshot.rates[code] : amount;
     setExpression(String(Number(converted.toPrecision(12))));
     if (mode === 'fiat') setFiatBase(code);
-    else setCryptoBase(code);
+    else if (mode === 'crypto') setCryptoBase(code);
+    else setMixedBase(code);
   };
 
   const swapBase = () => {
@@ -107,7 +122,11 @@ export default function App() {
 
   const updateCurrencies = (codes: string[]) => {
     if (mode === 'fiat') setFiatCurrencies(codes);
-    else setCryptoCurrencies(codes);
+    else if (mode === 'crypto') setCryptoCurrencies(codes);
+    else {
+      setMixedAssets(codes);
+      if (!codes.includes(mixedBase)) setMixedBase(codes[0]);
+    }
   };
 
   return (

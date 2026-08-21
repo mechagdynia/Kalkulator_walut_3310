@@ -31,7 +31,7 @@
 - `src/services/rate-service.ts` — cache, walidacja, timeout i failover API.
 - `src/hooks/useRates.ts` — stan ładowania kursów dla React.
 - `src/components/StatusBar.tsx` — status sieci, odświeżanie, zgłoszenie i motyw.
-- `src/components/AssetTabs.tsx` — zakładki Waluty i Krypto.
+- `src/components/AssetTabs.tsx` — zakładki Waluty, Krypto i Waluty/Krypto.
 - `src/components/CryptoBadge.tsx` — kolorowe oznaczenia kryptowalut.
 - `src/components/CurrencyFlag.tsx` — lokalna flaga Flagpedii z tekstem alternatywnym.
 - `src/components/CurrencyList.tsx` — lista przeliczonych walut.
