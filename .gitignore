@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.local
+.DS_Store
+*.log
+android/.gradle/
+android/local.properties
+ios/App/Pods/
+ios/App/App/public/
+.release-signing/
+release-assets/
