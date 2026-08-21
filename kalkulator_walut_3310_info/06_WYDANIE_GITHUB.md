@@ -36,7 +36,8 @@ iOS:
 - Repozytorium docelowe: `Kalkulator_walut_3310`.
 - Wersja: `1.0.0`.
 - Tag: `v1.0.0`.
-- Prywatne repozytorium utworzono i wysłano gałąź `main`.
+- Publiczne repozytorium utworzono i wysłano gałąź `main`.
+- Dodano opis oraz 15 tematów ułatwiających znalezienie projektu w GitHub Search.
 - Szkic `Waluta 3310 v1.0.0` utworzono i zweryfikowano na GitHubie.
 - Szkic ma obecnie 0 załączników i nie jest publiczny.
 - Podpisane pliki nie zostały jeszcze zbudowane, ponieważ sekrety wydawnicze nie są skonfigurowane.

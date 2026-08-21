@@ -30,7 +30,7 @@ Ostatnia aktualizacja: 21 sierpnia 2026
 - Dodano trwały pakiet Vitest + Testing Library: 6 plików, 58/58 testów zaliczonych.
 - Lokalny podgląd produkcyjny działa pod `http://127.0.0.1:4173/`.
 - Dodano workflow jednego GitHub Release z podpisanymi APK/IPA i automatycznymi archiwami źródeł.
-- Utworzono pierwsze prywatne repozytorium konta `mechagdynia` i szkic wydania `v1.0.0`.
+- Utworzono pierwsze publiczne repozytorium konta `mechagdynia` i szkic wydania `v1.0.0`.
 - Połączono listę walut i wyświetlacz kalkulatora w jeden zaokrąglony ekran z separatorem.
 - Rozszerzono status offline o datę i godzinę ostatnich zapisanych kursów.
 - Przygotowano rozbudowany opis README i metadane publicznego repozytorium.
