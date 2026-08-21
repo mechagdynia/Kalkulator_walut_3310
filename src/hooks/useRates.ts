@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getRates } from '../services/rate-service';
-import type { RateSnapshot, RateStatus } from '../types/currency';
+import type { AssetMode, RateSnapshot, RateStatus } from '../types/currency';
 
-export function useRates(base: string) {
+export function useRates(base: string, mode: AssetMode) {
   const [snapshot, setSnapshot] = useState<RateSnapshot | null>(null);
   const [status, setStatus] = useState<RateStatus>('loading');
   const [error, setError] = useState('');
@@ -11,7 +11,7 @@ export function useRates(base: string) {
     setStatus('loading');
     setError('');
     try {
-      const result = await getRates(base, force);
+      const result = await getRates(base, force, mode);
       setSnapshot(result);
       setStatus(result.stale || !navigator.onLine ? 'offline' : 'online');
     } catch (reason) {
@@ -19,7 +19,7 @@ export function useRates(base: string) {
       setStatus('error');
       setError(reason instanceof Error ? reason.message : 'Nieznany błąd połączenia');
     }
-  }, [base]);
+  }, [base, mode]);
 
   useEffect(() => {
     void refresh();

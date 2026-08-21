@@ -2,7 +2,7 @@
   "name": "waluta-3310",
   "private": true,
   "version": "1.0.0",
-  "description": "Bezpieczny kalkulator walut Web/PWA/Android/iOS w stylistyce Neo-Retro LCD.",
+  "description": "Dwujęzyczny kalkulator walut i kryptowalut Web/PWA/Android/iOS z motywem Retro 3310 i Modern UI.",
   "type": "module",
   "scripts": {
     "dev": "vite --configLoader runner",

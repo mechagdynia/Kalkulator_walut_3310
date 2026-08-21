@@ -2,11 +2,11 @@
 
 Data wejścia w życie: 21 sierpnia 2026 r.
 
-Waluta 3310 nie wymaga konta, nie zawiera reklam, analityki ani modułów śledzących. Ustawienia, lista walut, ostatnie działanie i pamięć kursów są przechowywane wyłącznie lokalnie na urządzeniu.
+Waluta 3310 nie wymaga konta, nie zawiera reklam, analityki ani modułów śledzących. Ustawienia, listy walut i kryptowalut, ostatnie działanie oraz pamięć kursów są przechowywane wyłącznie lokalnie na urządzeniu.
 
 ## Połączenia internetowe
 
-W celu pobrania kursów aplikacja łączy się bezpośrednio z jednym z publicznych dostawców: Frankfurter, Narodowy Bank Polski, ExchangeRate-API albo Currency API. Dostawca technicznie otrzymuje adres IP, nagłówki połączenia oraz czas żądania i może przetwarzać je według własnej polityki prywatności. Aplikacja nie przekazuje tym usługom imienia, adresu e-mail, lokalizacji GPS ani zawartości kalkulatora.
+W celu pobrania kursów aplikacja łączy się bezpośrednio z jednym z publicznych dostawców: Narodowy Bank Polski, Frankfurter, ExchangeRate-API albo Currency API dla walut tradycyjnych oraz Coinbase dla kryptowalut. Dostawca technicznie otrzymuje adres IP, nagłówki połączenia oraz czas żądania i może przetwarzać je według własnej polityki prywatności. Aplikacja nie przekazuje tym usługom imienia, adresu e-mail, lokalizacji GPS ani zawartości kalkulatora.
 
 Aplikacja nie pobiera lokalizacji po IP. Waluta początkowa jest dobierana lokalnie na podstawie ustawienia języka i regionu urządzenia.
 

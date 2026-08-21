@@ -31,7 +31,9 @@ describe('build i bezpieczeństwo', () => {
     expect(manifest.orientation).toBe('portrait');
     expect(existsSync(join(root, 'public/icon-192.png'))).toBe(true);
     expect(existsSync(join(root, 'public/icon-512.png'))).toBe(true);
-    expect(read('public/sw.js')).toContain("const CACHE = 'waluta-3310-v1'");
+    expect(JSON.parse(read('public/manifest.pl.webmanifest')).lang).toBe('pl');
+    expect(read('public/sw.js')).toContain("const CACHE = 'waluta-3310-v3'");
+    expect(readdirSync(join(root, 'public/flags')).filter((file) => file.endsWith('.svg')).length).toBeGreaterThanOrEqual(145);
   });
 
   it('nie zawiera sekretów ani niebezpiecznego eval w źródłach', () => {

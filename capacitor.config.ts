@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'pl.waluta3310.app',
-  appName: 'Waluta 3310',
+  appName: 'Currency Calculator 3310',
   webDir: 'dist',
   backgroundColor: '#151915',
   server: {

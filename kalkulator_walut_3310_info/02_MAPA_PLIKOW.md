@@ -13,6 +13,7 @@
 - `.gitignore` — pliki pomijane w repozytorium.
 - `.env.example` — informuje, że aplikacja nie wymaga sekretów.
 - `.github/workflows/release.yml` — testy, podpisane buildy mobilne i jeden szkic GitHub Release.
+- `.github/workflows/deploy.yml` — automatyczny build Vite i publikacja folderu `dist/` na GitHub Pages.
 
 ## Kod aplikacji
 
@@ -22,12 +23,17 @@
 - `src/vite-env.d.ts` — typy środowiska Vite.
 - `src/types/currency.ts` — typy waluty, snapshotu i stanu połączenia.
 - `src/data/currencies.ts` — katalog walut, flagi, symbole i dobór waluty z regionu.
+- `src/data/cryptocurrencies.ts` — katalog 30 kryptowalut, symbole i kolory.
+- `src/i18n.ts` — teksty polskie i angielskie oraz wykrywanie języka.
 - `src/utils/calculator.ts` — bezpieczny parser działań i obsługa klawiszy.
 - `src/utils/format.ts` — format kwot oraz daty kursu.
 - `src/services/storage.ts` — bezpieczny odczyt/zapis localStorage.
 - `src/services/rate-service.ts` — cache, walidacja, timeout i failover API.
 - `src/hooks/useRates.ts` — stan ładowania kursów dla React.
 - `src/components/StatusBar.tsx` — status sieci, odświeżanie, zgłoszenie i motyw.
+- `src/components/AssetTabs.tsx` — zakładki Waluty i Krypto.
+- `src/components/CryptoBadge.tsx` — kolorowe oznaczenia kryptowalut.
+- `src/components/CurrencyFlag.tsx` — lokalna flaga Flagpedii z tekstem alternatywnym.
 - `src/components/CurrencyList.tsx` — lista przeliczonych walut.
 - `src/components/CalculatorDisplay.tsx` — pasek działania, wyniku i SWAP.
 - `src/components/Keypad.tsx` — klawiatura ekranowa i fizyczna.
@@ -36,10 +42,12 @@
 ## PWA i grafika
 
 - `public/manifest.webmanifest` — instalacja PWA i dane ikon.
+- `public/manifest.pl.webmanifest` — polska nazwa i opis instalowanej PWA.
 - `public/sw.js` — cache powłoki oraz działanie offline.
 - `public/icon.svg` — wektorowa ikona źródłowa.
 - `public/icon-192.png` — mała ikona PWA; generowana z SVG.
 - `public/icon-512.png` — duża ikona PWA; generowana z SVG.
+- `public/flags/` — lokalne flagi SVG z Flagpedii dla katalogu NBP.
 
 ## Dokumenty
 
@@ -57,6 +65,7 @@
 - `kalkulator_walut_3310_info/05_RAPORT_QA_2026-08-21.md` — końcowy raport testów senior QA.
 - `kalkulator_walut_3310_info/06_WYDANIE_GITHUB.md` — konfiguracja i stan wydania `v1.0.0`.
 - `kalkulator_walut_3310_info/07_OPIS_WYDANIA_v1.0.0.md` — publiczny opis GitHub Release.
+- `kalkulator_walut_3310_info/08_PODPIS_ANDROID.md` — niepoufne odciski i zasady przechowania klucza Android.
 
 ## Testy
 

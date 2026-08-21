@@ -15,3 +15,5 @@ export interface RateSnapshot {
 }
 
 export type RateStatus = 'loading' | 'online' | 'offline' | 'error';
+
+export type AssetMode = 'fiat' | 'crypto';

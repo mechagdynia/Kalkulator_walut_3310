@@ -1,9 +1,9 @@
 {
   "id": "waluta-3310",
-  "name": "Waluta 3310",
-  "short_name": "Waluta 3310",
-  "description": "Kalkulator i przelicznik walut w stylu Neo-Retro LCD.",
-  "lang": "pl",
+  "name": "Currency Calculator 3310",
+  "short_name": "Currency 3310",
+  "description": "Currency and cryptocurrency calculator with retro and modern themes.",
+  "lang": "en",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

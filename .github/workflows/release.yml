@@ -7,6 +7,16 @@ on:
         description: Tag
         required: true
         default: v1.0.0
+      build_android:
+        description: Build signed Android APK
+        required: true
+        type: boolean
+        default: true
+      build_ios:
+        description: Build signed iOS IPA
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -28,6 +38,7 @@ jobs:
       - run: npm run test:qa
 
   android:
+    if: ${{ inputs.build_android }}
     needs: test
     runs-on: ubuntu-latest
     env:
@@ -71,6 +82,7 @@ jobs:
           if-no-files-found: error
 
   ios:
+    if: ${{ inputs.build_ios }}
     needs: test
     runs-on: macos-latest
     env:
@@ -136,6 +148,7 @@ jobs:
     needs:
       - android
       - ios
+    if: ${{ always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && (needs.android.result == 'success' || needs.ios.result == 'success') }}
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}
@@ -148,8 +161,13 @@ jobs:
           merge-multiple: true
       - shell: bash
         run: |
+          mapfile -t ASSETS < <(find release-assets -maxdepth 1 -type f \( -name 'app-release.apk' -o -name 'app-release.ipa' \) | sort)
+          if [ "${#ASSETS[@]}" -eq 0 ]; then
+            echo "::error::No release assets found"
+            exit 1
+          fi
           if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release upload "$TAG" release-assets/app-release.apk release-assets/app-release.ipa --clobber
+            gh release upload "$TAG" "${ASSETS[@]}" --clobber
           else
-            gh release create "$TAG" release-assets/app-release.apk release-assets/app-release.ipa --draft --target "$GITHUB_SHA" --title "Waluta 3310 $TAG" --notes-file kalkulator_walut_3310_info/07_OPIS_WYDANIA_v1.0.0.md
+            gh release create "$TAG" "${ASSETS[@]}" --draft --target "$GITHUB_SHA" --title "Currency Calculator 3310 / Waluta 3310 $TAG" --notes-file kalkulator_walut_3310_info/07_OPIS_WYDANIA_v1.0.0.md
           fi

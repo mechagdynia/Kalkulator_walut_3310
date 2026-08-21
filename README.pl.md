@@ -8,18 +8,20 @@
 
 ### Kalkulator i przelicznik walut w dwóch światach: kultowe Retro LCD oraz lekki, kolorowy Modern UI.
 
-**Web · PWA · Android · iOS · 30 walut · tryb offline · bez reklam**
+**Web · PWA · Android · iOS · 149 walut NBP · 30 kryptowalut · polski/angielski · tryb offline · bez reklam**
 
-Waluta 3310 łączy pełny kalkulator z jednoczesnym przeliczaniem wielu walut. Aplikacja działa bez konta i własnego backendu, zapamiętuje ostatnie kursy oraz pozwala przełączyć cały interfejs między surową stylistyką retro a współczesnym wyglądem mobilnym.
+Waluta 3310 łączy pełny kalkulator z jednoczesnym przeliczaniem walut i kryptowalut. Aplikacja działa bez konta i własnego backendu, zapamiętuje ostatnie kursy oraz pozwala przełączyć cały interfejs między surową stylistyką retro a współczesnym wyglądem mobilnym.
 
 ## Dlaczego warto
 
 - Przeliczanie od 2 do 8 walut jednocześnie.
-- 30 popularnych walut z wyszukiwaniem, flagami i symbolami.
+- Wszystkie 149 walut objętych aktualnymi tabelami A i B NBP, z wyszukiwaniem, lokalnymi flagami Flagpedii i symbolami.
+- Osobna zakładka Krypto z 30 popularnymi kryptowalutami i kursami Coinbase.
+- Polski i angielski interfejs; pierwszy język jest dobierany z ustawień urządzenia.
 - Kalkulator działań połączony bezpośrednio z kwotą bazową.
 - Dwie zapamiętywane skórki: Retro LCD i Modern UI.
 - Automatyczny wybór waluty lokalnej oraz szybka funkcja SWAP.
-- Cztery źródła kursów z automatycznym przełączeniem awaryjnym.
+- Cztery źródła kursów walut z automatycznym przełączeniem awaryjnym.
 - Ostatnie poprawne kursy pozostają dostępne offline wraz z datą aktualizacji.
 - Instalowalna PWA oraz natywne projekty Android i iOS przez Capacitor.
 - Brak reklam, zakupów w aplikacji, kont użytkowników i własnej analityki.

@@ -4,22 +4,24 @@
 
 </div>
 
-# Waluta 3310
+# Currency Calculator 3310
 
 ### A currency calculator living in two worlds: iconic Retro LCD and a colorful, modern mobile interface.
 
-**Web · PWA · Android · iOS · 30 currencies · offline mode · no ads**
+**Web · PWA · Android · iOS · 149 NBP currencies · 30 crypto assets · Polish/English · offline mode · no ads**
 
-Waluta 3310 combines a full calculator with simultaneous multi-currency conversion. It works without an account or a proprietary backend, remembers the latest exchange rates and lets you switch the entire interface between a raw retro display and a polished contemporary design.
+Currency Calculator 3310 combines a full calculator with simultaneous currency and cryptocurrency conversion. It works without an account or a proprietary backend, remembers the latest rates and lets you switch the entire interface between a raw retro display and a polished contemporary design.
 
 ## Highlights
 
 - Convert between 2 and 8 currencies at the same time.
-- Browse 30 popular currencies with search, flags and symbols.
+- Browse all 149 currencies currently covered by NBP tables A and B, with search, local Flagpedia flags and symbols.
+- Use a separate Crypto tab with 30 popular cryptocurrencies and Coinbase rates.
+- Switch the application between Polish and English; the first language is detected from the device.
 - Use a full calculator directly connected to the base amount.
 - Switch between persistent Retro LCD and Modern UI themes.
 - Detect the local currency automatically and change the base with SWAP.
-- Fall back across four exchange-rate providers automatically.
+- Fall back across four fiat exchange-rate providers automatically.
 - Keep the last valid rates available offline with their update date.
 - Install as a PWA or build the native Android and iOS Capacitor projects.
 - No ads, in-app purchases, user accounts or proprietary analytics.

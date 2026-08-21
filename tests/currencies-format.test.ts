@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { CURRENCIES, DEFAULT_CURRENCIES, countryFlag, currencyByCode } from '../src/data/currencies';
+import { existsSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { CURRENCIES, DEFAULT_CURRENCIES, flagAsset, currencyByCode } from '../src/data/currencies';
 import { formatMoney, formatRateDate } from '../src/utils/format';
 
 describe('katalog walut i formatowanie', () => {
@@ -7,6 +9,7 @@ describe('katalog walut i formatowanie', () => {
     const codes = CURRENCIES.map((currency) => currency.code);
     expect(new Set(codes).size).toBe(codes.length);
     expect(codes.every((code) => /^[A-Z]{3}$/.test(code))).toBe(true);
+    expect(codes).toHaveLength(149);
   });
 
   it('zawiera wszystkie waluty domyślne', () => {
@@ -15,7 +18,13 @@ describe('katalog walut i formatowanie', () => {
 
   it('zapewnia bezpieczny fallback dla nieznanego kodu', () => {
     expect(currencyByCode('XYZ')).toEqual({ code: 'XYZ', name: 'XYZ', countryCode: 'UN', symbol: 'XYZ' });
-    expect(countryFlag('UN')).toBe('🌐');
+    expect(flagAsset('UN')).toBe('/flags/un.svg');
+    expect(flagAsset('../')).toBe('/flags/un.svg');
+  });
+
+  it('ma lokalną flagę Flagpedii dla każdej waluty', () => {
+    const root = resolve('.');
+    expect(CURRENCIES.every((currency) => existsSync(join(root, 'public', flagAsset(currency.countryCode).replace(/^\//, ''))))).toBe(true);
   });
 
   it('formatuje kwoty zgodnie z polską lokalizacją', () => {

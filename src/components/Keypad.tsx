@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { COPY, type Language } from '../i18n';
 
 const KEYS = [
   { label: 'AC', kind: 'function' }, { label: 'DEL', kind: 'function' }, { label: '%', kind: 'function' }, { label: '÷', kind: 'operator' },
@@ -9,10 +10,12 @@ const KEYS = [
 ];
 
 interface KeypadProps {
+  language: Language;
   onKey: (key: string) => void;
 }
 
-export function Keypad({ onKey }: KeypadProps) {
+export function Keypad({ language, onKey }: KeypadProps) {
+  const copy = COPY[language];
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const map: Record<string, string> = { Enter: '=', Backspace: 'DEL', Escape: 'AC', '*': '×', '/': '÷', '-': '−', ',': '.' };
@@ -32,9 +35,9 @@ export function Keypad({ onKey }: KeypadProps) {
   };
 
   return (
-    <section className="keypad" aria-label="Klawiatura kalkulatora">
+    <section className="keypad" aria-label={copy.keypad}>
       {KEYS.map(({ label, kind }) => (
-        <button type="button" key={label} className={`key ${kind ? `key-${kind}` : ''}`} onClick={() => press(label)} aria-label={label === 'DEL' ? 'Usuń ostatni znak' : label}>
+        <button type="button" key={label} className={`key ${kind ? `key-${kind}` : ''}`} onClick={() => press(label)} aria-label={label === 'DEL' ? copy.deleteLast : label}>
           {label}
         </button>
       ))}

@@ -7,5 +7,7 @@
 - API Narodowego Banku Polskiego — publiczne dane kursowe NBP.
 - ExchangeRate-API — publiczny endpoint kursów; obowiązują warunki operatora usługi.
 - Currency API by Fawaz Ahmed — otwarty zbiór kursów dystrybuowany przez jsDelivr.
+- Coinbase Exchange Rates API — publiczne dane kursowe kryptowalut, używane bez klucza API.
+- Flagpedia / FlagCDN — lokalne pliki SVG flag pobrane z `flagcdn.com`; źródłowe grafiki pochodzą z Wikimedia Commons. https://flagpedia.net
 
 Nazwy i znaki towarowe należą do ich właścicieli. „Nokia” jest znakiem towarowym odpowiedniego właściciela; aplikacja nie jest przez niego sponsorowana ani zatwierdzona. Określenie „3310” opisuje wyłącznie inspirację estetyczną interfejsu.

@@ -6,8 +6,10 @@ Ostatnia aktualizacja: 21 sierpnia 2026
 
 - Utworzono aplikację React + TypeScript + Vite od zera.
 - Powstał kalkulator bez `eval`, multi-przelicznik i wybór od 2 do 8 walut.
-- Dodano 30 walut, flagi emoji, formatowanie kwot i zmianę waluty bazowej.
-- Dodano cztery źródła kursów z automatycznym failover i limitem czasu.
+- Dodano 149 walut PLN + NBP A/B, lokalne flagi Flagpedii, formatowanie kwot i zmianę waluty bazowej.
+- Dodano osobną zakładkę z 30 kryptowalutami i publicznymi kursami Coinbase.
+- Dodano polską i angielską wersję interfejsu, automatyczny wybór języka i nazwę `Currency Calculator 3310`.
+- Dodano cztery źródła kursów walut z automatycznym failover i limitem czasu.
 - Dodano pamięć kursów na godzinę oraz użycie starych kursów offline.
 - Dodano dwie zapamiętywane skórki: `retro` i `modern`.
 - Dodano PWA, service worker, manifest i konfigurację Capacitor Android/iOS.
@@ -27,7 +29,7 @@ Ostatnia aktualizacja: 21 sierpnia 2026
 - Publiczne API Frankfurter odpowiedziało kodem 200 dla PLN i zwróciło 29 kursów.
 - PWA zwraca kod 200 dla strony, manifestu, service workera i obu ikon PNG.
 - Web build został zsynchronizowany do Androida i iOS.
-- Dodano trwały pakiet Vitest + Testing Library: 6 plików, 58/58 testów zaliczonych.
+- Dodano trwały pakiet Vitest + Testing Library: 6 plików, 63 testy obejmujące także języki, krypto, NBP A+B i Flagpedię.
 - Lokalny podgląd produkcyjny działa pod `http://127.0.0.1:4173/`.
 - Dodano workflow jednego GitHub Release z podpisanymi APK/IPA i automatycznymi archiwami źródeł.
 - Utworzono pierwsze publiczne repozytorium konta `mechagdynia` i szkic wydania `v1.0.0`.
@@ -35,6 +37,10 @@ Ostatnia aktualizacja: 21 sierpnia 2026
 - Rozszerzono status offline o datę i godzinę ostatnich zapisanych kursów.
 - Przygotowano rozbudowany opis README i metadane publicznego repozytorium.
 - Dodano pełne instrukcje repozytorium po angielsku i polsku z widocznym przełącznikiem języka.
+- Zastąpiono flagi emoji lokalnymi flagami SVG z Flagpedii, również dla Polski, UE i trybu offline.
+- Wygenerowano stały klucz przesyłania Android JKS, certyfikat publiczny i lokalny szyfrogram hasła DPAPI.
+- Skonfigurowano cztery ukryte sekrety podpisu Android w GitHub Actions.
+- Dodano automatyczny build i wdrożenie `dist/` na GitHub Pages po każdym pushu do `main`; Vite używa `base: './'`.
 
 ## Pozostało przed publikacją
 
@@ -43,7 +49,7 @@ Ostatnia aktualizacja: 21 sierpnia 2026
 - Na macOS uruchomić CocoaPods/Xcode, zbudować Archive i podpisać iOS.
 - Ustawić ostateczny, unikalny identyfikator pakietu zgodny z kontami sklepów.
 - Opublikować politykę prywatności pod adresem HTTPS i wypełnić formularze sklepowe.
-- Skonfigurować sekrety podpisu Android i Apple na GitHubie, uruchomić workflow i sprawdzić szkic `v1.0.0`.
+- Skonfigurować podpis Apple, zbudować IPA i uzupełnić szkic `v1.0.0`.
 
 ## Najważniejsza decyzja
 

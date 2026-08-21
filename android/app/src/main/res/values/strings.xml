@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Waluta 3310</string>
-    <string name="title_activity_main">Waluta 3310</string>
+    <string name="app_name">Currency Calculator 3310</string>
+    <string name="title_activity_main">Currency Calculator 3310</string>
     <string name="package_name">pl.waluta3310.app</string>
     <string name="custom_url_scheme">pl.waluta3310.app</string>
 </resources>
