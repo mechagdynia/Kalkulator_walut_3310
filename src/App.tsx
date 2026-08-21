@@ -78,8 +78,10 @@ export default function App() {
           theme={theme}
           onToggleTheme={() => setTheme((current) => current === 'retro' ? 'modern' : 'retro')}
         />
-        <CurrencyList currencies={currencies} active={base} amount={amount} snapshot={snapshot} onSelect={selectBase} onEdit={() => setPickerOpen(true)} />
-        <CalculatorDisplay base={base} expression={expression} amount={amount} onSwap={swapBase} />
+        <div className="display-stack">
+          <CurrencyList currencies={currencies} active={base} amount={amount} snapshot={snapshot} onSelect={selectBase} onEdit={() => setPickerOpen(true)} />
+          <CalculatorDisplay base={base} expression={expression} amount={amount} onSwap={swapBase} />
+        </div>
         <Keypad onKey={handleKey} />
       </section>
       {pickerOpen && <CurrencyPicker selected={currencies} onChange={setCurrencies} onClose={() => setPickerOpen(false)} />}

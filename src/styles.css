@@ -37,7 +37,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid #d9f25f; outline-
 
 .phone {
   width: min(100%, 460px); height: 100%; max-height: 920px;
-  display: grid; grid-template-rows: 34px minmax(0, 40fr) minmax(72px, 10fr) minmax(0, 50fr);
+  display: grid; grid-template-rows: 34px minmax(0, 50fr) minmax(0, 50fr);
   overflow: hidden;
   background: linear-gradient(155deg, #2d342e, var(--body) 48%, #121512);
   border: 1px solid rgba(255,255,255,.1);
@@ -60,9 +60,16 @@ button:focus-visible, input:focus-visible { outline: 3px solid #d9f25f; outline-
 .spin { display: inline-block; animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+.display-stack {
+  min-height: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto;
+  margin: 0 10px; overflow: hidden;
+  border: 8px solid #0b0f0c; border-radius: 17px;
+  background: var(--lcd);
+  box-shadow: inset 0 0 18px rgba(25,43,22,.3), 0 1px rgba(255,255,255,.12);
+}
 .currency-panel {
   position: relative; overflow: hidden; isolation: isolate;
-  margin: 0 10px; border: 8px solid #0b0f0c; border-radius: 17px 17px 10px 10px;
+  min-height: 0; border: 0; border-radius: 0;
   padding: 10px 9px 8px;
   color: var(--ink); background: linear-gradient(145deg, #b5ca9f, var(--lcd) 42%, var(--lcd-deep));
   box-shadow: inset 0 0 18px rgba(25,43,22,.3), 0 1px rgba(255,255,255,.12);
@@ -84,7 +91,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid #d9f25f; outline-
 .currency-meta small { font-size: 9px; font-weight: 700; opacity: .72; }
 .currency-value { min-width: 0; overflow: hidden; text-overflow: ellipsis; text-align: right; white-space: nowrap; font: 900 clamp(15px, 5vw, 22px)/1 "Courier New", monospace; letter-spacing: -.05em; }
 
-.calculator-display { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 9px; padding: 8px 16px; color: var(--ink); background: linear-gradient(90deg, #8fa77c, #b4c89f 50%, #8da579); border-block: 3px solid #090c09; box-shadow: inset 0 0 12px rgba(27,41,24,.3); }
+.calculator-display { position: relative; z-index: 4; display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 9px; min-height: 72px; padding: 8px 8px; color: var(--ink); background: linear-gradient(90deg, #8fa77c, #b4c89f 50%, #8da579); border: 0; border-top: 3px solid #090c09; border-radius: 0; box-shadow: inset 0 0 12px rgba(27,41,24,.3); }
 .base-label span, .base-label strong { display: block; font-family: "Courier New", monospace; line-height: 1; }
 .base-label span { font-size: 7px; font-weight: 800; letter-spacing: .12em; }
 .base-label strong { margin-top: 3px; font-size: 15px; }
@@ -130,7 +137,8 @@ button:focus-visible, input:focus-visible { outline: 3px solid #d9f25f; outline-
 .theme-modern .status-bar { color: #536078; }
 .theme-modern .theme-button { color: #414c62; }
 .theme-modern .status-online { color: #38b778; }
-.theme-modern .currency-panel { margin: 0 12px 8px; border: 0; border-radius: 25px; padding: 14px 12px 9px; color: #172038; background: linear-gradient(145deg, rgba(255,255,255,.92), rgba(240,244,255,.74)); box-shadow: 0 13px 35px rgba(66,76,126,.12), inset 0 1px white; }
+.theme-modern .display-stack { margin: 0 12px 8px; border: 0; border-radius: 25px; background: rgba(255,255,255,.78); box-shadow: 0 13px 35px rgba(66,76,126,.12), inset 0 1px white; }
+.theme-modern .currency-panel { border: 0; border-radius: 0; padding: 14px 12px 9px; color: #172038; background: linear-gradient(145deg, rgba(255,255,255,.92), rgba(240,244,255,.74)); box-shadow: none; }
 .theme-modern .currency-panel::before { opacity: 1; background: radial-gradient(circle at 90% 0, rgba(121,110,255,.22), transparent 34%), radial-gradient(circle at 0 100%, rgba(61,198,202,.18), transparent 36%); }
 .theme-modern .scanlines { display: none; }
 .theme-modern .lcd-header { border-color: rgba(43,54,88,.09); }
@@ -140,7 +148,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid #d9f25f; outline-
 .theme-modern .currency-row { border-color: rgba(35,48,80,.07); color: #1b2540; border-radius: 13px; }
 .theme-modern .currency-row.active { color: #fff; background: linear-gradient(100deg, #7468f7, #966fe9); box-shadow: 0 7px 18px rgba(111,99,238,.24); }
 .theme-modern .flag { filter: saturate(1.25) drop-shadow(0 2px 3px rgba(0,0,0,.12)); }
-.theme-modern .calculator-display { margin: 0 12px 8px; border: 0; border-radius: 18px; color: #1f2941; background: rgba(255,255,255,.7); box-shadow: 0 10px 28px rgba(69,77,120,.1), inset 0 1px white; }
+.theme-modern .calculator-display { border: 0; border-top: 3px solid #1d2230; border-radius: 0; color: #1f2941; background: rgba(255,255,255,.7); box-shadow: inset 0 1px white; }
 .theme-modern .base-label span, .theme-modern .base-label strong, .theme-modern .expression, .theme-modern .swap-button { font-family: inherit; }
 .theme-modern .base-label span { color: #7468f7; }
 .theme-modern .swap-button { border: 0; border-radius: 12px; color: #655bea; background: #e9e7ff; }
@@ -163,11 +171,13 @@ button:focus-visible, input:focus-visible { outline: 3px solid #d9f25f; outline-
   .phone { height: min(900px, 100%); }
 }
 @media (max-height: 640px) {
-  .phone { grid-template-rows: 28px minmax(0, 39fr) minmax(64px, 11fr) minmax(0, 50fr); border-radius: 18px; }
-  .currency-panel { border-width: 5px; padding-top: 6px; }
+  .phone { grid-template-rows: 28px minmax(0, 50fr) minmax(0, 50fr); border-radius: 18px; }
+  .display-stack { border-width: 5px; }
+  .currency-panel { padding-top: 6px; }
   .lcd-header { height: 31px; }
   .currency-list { height: calc(100% - 31px); }
   .currency-row { min-height: 36px; }
+  .calculator-display { min-height: 64px; }
   .keypad { padding: 8px 12px 11px; gap: 6px; }
 }
 @media (prefers-reduced-motion: reduce) {

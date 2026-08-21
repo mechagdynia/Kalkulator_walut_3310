@@ -16,7 +16,7 @@ export function StatusBar({ status, source, fetchedAt, onRefresh, onReport, them
   const label = status === 'loading'
     ? 'ŁĄCZENIE…'
     : status === 'offline'
-      ? `OFFLINE · ${fetchedAt ? formatRateDate(fetchedAt) : 'CACHE'}`
+      ? `OFFLINE · OSTATNIA AKTUALIZACJA ${fetchedAt ? formatRateDate(fetchedAt) : 'BRAK'}`
       : status === 'error'
         ? 'BRAK KURSÓW'
         : `ONLINE · ${source ?? 'API'}`;
@@ -24,7 +24,7 @@ export function StatusBar({ status, source, fetchedAt, onRefresh, onReport, them
   return (
     <div className="status-bar" aria-live="polite">
       <span className={`status-dot status-${status}`} aria-hidden="true" />
-      <span className="status-label">{label}</span>
+      <span className="status-label" title={label}>{label}</span>
       {status === 'error' && <button className="text-action" onClick={onReport}>ZGŁOŚ</button>}
       <button className="theme-button" type="button" onClick={onToggleTheme} aria-label={`Włącz motyw ${theme === 'retro' ? 'nowoczesny' : 'Nokia 3310'}`}>
         <span aria-hidden="true">{theme === 'retro' ? '◐' : '▦'}</span>

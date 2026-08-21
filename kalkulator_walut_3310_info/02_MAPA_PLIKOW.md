@@ -43,7 +43,7 @@
 
 ## Dokumenty
 
-- `README.md` — uruchomienie, publikacja i bezpieczeństwo.
+- `README.md` — prezentacja aplikacji, funkcje, uruchomienie, wydania i bezpieczeństwo.
 - `LICENSE.md` — bezpłatna licencja użytkownika końcowego.
 - `PRIVACY.md` — polityka prywatności.
 - `THIRD_PARTY_NOTICES.md` — biblioteki, API i znaki towarowe.

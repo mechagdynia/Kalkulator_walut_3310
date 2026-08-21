@@ -27,10 +27,13 @@ Ostatnia aktualizacja: 21 sierpnia 2026
 - Publiczne API Frankfurter odpowiedziało kodem 200 dla PLN i zwróciło 29 kursów.
 - PWA zwraca kod 200 dla strony, manifestu, service workera i obu ikon PNG.
 - Web build został zsynchronizowany do Androida i iOS.
-- Dodano trwały pakiet Vitest + Testing Library: 6 plików, 57/57 testów zaliczonych.
+- Dodano trwały pakiet Vitest + Testing Library: 6 plików, 58/58 testów zaliczonych.
 - Lokalny podgląd produkcyjny działa pod `http://127.0.0.1:4173/`.
 - Dodano workflow jednego GitHub Release z podpisanymi APK/IPA i automatycznymi archiwami źródeł.
 - Utworzono pierwsze prywatne repozytorium konta `mechagdynia` i szkic wydania `v1.0.0`.
+- Połączono listę walut i wyświetlacz kalkulatora w jeden zaokrąglony ekran z separatorem.
+- Rozszerzono status offline o datę i godzinę ostatnich zapisanych kursów.
+- Przygotowano rozbudowany opis README i metadane publicznego repozytorium.
 
 ## Pozostało przed publikacją
 

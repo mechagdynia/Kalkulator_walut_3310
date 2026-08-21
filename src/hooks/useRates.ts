@@ -13,7 +13,7 @@ export function useRates(base: string) {
     try {
       const result = await getRates(base, force);
       setSnapshot(result);
-      setStatus(result.stale ? 'offline' : 'online');
+      setStatus(result.stale || !navigator.onLine ? 'offline' : 'online');
     } catch (reason) {
       setSnapshot(null);
       setStatus('error');
@@ -23,6 +23,17 @@ export function useRates(base: string) {
 
   useEffect(() => {
     void refresh();
+  }, [refresh]);
+
+  useEffect(() => {
+    const handleOffline = () => setStatus((current) => current === 'error' ? current : 'offline');
+    const handleOnline = () => void refresh(true);
+    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline);
+    return () => {
+      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('online', handleOnline);
+    };
   }, [refresh]);
 
   return { snapshot, status, error, refresh };

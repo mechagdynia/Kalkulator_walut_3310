@@ -32,6 +32,14 @@ describe('App', () => {
     expect(screen.getByText('25,00')).toBeInTheDocument();
   });
 
+  it('łączy listę walut i wyświetlacz kalkulatora w jeden ekran', () => {
+    render(<App />);
+    const currencies = screen.getByRole('region', { name: 'Przeliczone waluty' });
+    const calculator = screen.getByRole('region', { name: 'Wyświetlacz kalkulatora' });
+    expect(currencies.parentElement).toBe(calculator.parentElement);
+    expect(calculator.parentElement).toHaveClass('display-stack');
+  });
+
   it('wykonuje działanie przez klawiaturę ekranową', async () => {
     const user = userEvent.setup();
     render(<App />);
@@ -92,7 +100,7 @@ describe('App', () => {
   it('pokazuje tryb offline dla starego cache', async () => {
     getRatesMock.mockResolvedValue({ ...snapshot, stale: true });
     render(<App />);
-    expect((await screen.findAllByText(/OFFLINE/)).length).toBeGreaterThan(0);
+    expect((await screen.findAllByText(/OFFLINE · OSTATNIA AKTUALIZACJA \d{2}\.\d{2}\.\d{2}, \d{2}:\d{2}/)).length).toBeGreaterThan(0);
     expect(screen.queryByRole('button', { name: 'ZGŁOŚ' })).not.toBeInTheDocument();
   });
 

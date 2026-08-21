@@ -15,5 +15,5 @@ export function formatMoney(value: number, code: string): string {
 }
 
 export function formatRateDate(timestamp: number): string {
-  return new Intl.DateTimeFormat('pl-PL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }).format(timestamp);
+  return new Intl.DateTimeFormat('pl-PL', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).format(timestamp);
 }
