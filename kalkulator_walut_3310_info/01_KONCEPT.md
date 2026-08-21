@@ -10,7 +10,7 @@ Bezpłatny, szybki kalkulator walut i kryptowalut działający w przeglądarce, 
 
 ## Układ
 
-- Nad ekranem: zakładki Waluty i Krypto.
+- Nad ekranem: zakładki Waluty, Krypto i Waluty/Krypto.
 - Góra około 40%: lista 2–8 walut albo kryptowalut.
 - Środek około 10%: działanie, wynik, waluta bazowa i SWAP.
 - Dół około 50%: klawiatura kalkulatora 4×5.
@@ -31,6 +31,8 @@ Bezpłatny, szybki kalkulator walut i kryptowalut działający w przeglądarce, 
 ## Kursy
 
 Waluty tradycyjne korzystają najpierw z tabel A+B NBP, a następnie z Frankfurter/ECB, ExchangeRate-API i Currency API. Kryptowaluty korzystają z publicznego endpointu Coinbase. Po niepowodzeniu źródeł aplikacja używa ostatniego zapisu lokalnego i pokazuje tryb offline. Pamięć świeżych kursów trwa 60 minut dla walut i 5 minut dla kryptowalut.
+
+Tryb Waluty/Krypto przechowuje dokładnie jedną walutę tradycyjną na pierwszej pozycji, domyślnie USD, oraz od 1 do 7 kryptowalut. Użytkownik może ustawić jako bazę walutę lub kryptowalutę. Przeliczenie łączy kurs Coinbase z kursem walutowym przez USD, a wynik jest zapisywany offline na 5 minut.
 
 ## Prywatność
 

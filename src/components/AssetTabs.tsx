@@ -13,6 +13,7 @@ export function AssetTabs({ mode, language, onChange }: AssetTabsProps) {
     <nav className="asset-tabs" aria-label={language === 'pl' ? 'Rodzaj aktywów' : 'Asset type'}>
       <button type="button" className={mode === 'fiat' ? 'active' : ''} aria-pressed={mode === 'fiat'} onClick={() => onChange('fiat')}>{copy.fiatTab}</button>
       <button type="button" className={mode === 'crypto' ? 'active' : ''} aria-pressed={mode === 'crypto'} onClick={() => onChange('crypto')}>{copy.cryptoTab}</button>
+      <button type="button" className={mode === 'mixed' ? 'active' : ''} aria-pressed={mode === 'mixed'} onClick={() => onChange('mixed')}>{copy.mixedTab}</button>
     </nav>
   );
 }
