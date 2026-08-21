@@ -31,9 +31,10 @@ iOS:
 
 ## Stan
 
-- Konto docelowe: `mechagdynia2-ai`.
+- Konto docelowe: `mechagdynia`.
 - E-mail autora: `mechagdynia@gmail.com`.
 - Repozytorium docelowe: `Kalkulator_walut_3310`.
 - Wersja: `1.0.0`.
 - Tag: `v1.0.0`.
+- Prywatne repozytorium utworzono i wysłano gałąź `main`.
 - Podpisane pliki nie zostały jeszcze zbudowane, ponieważ sekrety wydawnicze nie są skonfigurowane.

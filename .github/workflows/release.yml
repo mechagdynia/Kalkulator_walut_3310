@@ -151,5 +151,5 @@ jobs:
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" release-assets/app-release.apk release-assets/app-release.ipa --clobber
           else
-            gh release create "$TAG" release-assets/app-release.apk release-assets/app-release.ipa --draft --target "$GITHUB_SHA" --title "Waluta 3310 $TAG" --notes-file kalkulator_walut_3310_info/06_WYDANIE_GITHUB.md
+            gh release create "$TAG" release-assets/app-release.apk release-assets/app-release.ipa --draft --target "$GITHUB_SHA" --title "Waluta 3310 $TAG" --notes-file kalkulator_walut_3310_info/07_OPIS_WYDANIA_v1.0.0.md
           fi

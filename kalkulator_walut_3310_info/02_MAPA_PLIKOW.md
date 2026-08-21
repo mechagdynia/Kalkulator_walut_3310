@@ -55,6 +55,7 @@
 - `kalkulator_walut_3310_info/04_PLIKI_NATYWNE.md` — mapa projektów Android i iOS.
 - `kalkulator_walut_3310_info/05_RAPORT_QA_2026-08-21.md` — końcowy raport testów senior QA.
 - `kalkulator_walut_3310_info/06_WYDANIE_GITHUB.md` — konfiguracja i stan wydania `v1.0.0`.
+- `kalkulator_walut_3310_info/07_OPIS_WYDANIA_v1.0.0.md` — publiczny opis GitHub Release.
 
 ## Testy
 
