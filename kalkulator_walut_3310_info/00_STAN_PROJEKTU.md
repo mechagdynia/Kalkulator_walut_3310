@@ -34,6 +34,7 @@ Ostatnia aktualizacja: 21 sierpnia 2026
 - Połączono listę walut i wyświetlacz kalkulatora w jeden zaokrąglony ekran z separatorem.
 - Rozszerzono status offline o datę i godzinę ostatnich zapisanych kursów.
 - Przygotowano rozbudowany opis README i metadane publicznego repozytorium.
+- Dodano pełne instrukcje repozytorium po angielsku i polsku z widocznym przełącznikiem języka.
 
 ## Pozostało przed publikacją
 

@@ -43,7 +43,8 @@
 
 ## Dokumenty
 
-- `README.md` — prezentacja aplikacji, funkcje, uruchomienie, wydania i bezpieczeństwo.
+- `README.md` — międzynarodowa instrukcja po angielsku i przełącznik języka.
+- `README.pl.md` — pełna instrukcja po polsku i przełącznik języka.
 - `LICENSE.md` — bezpłatna licencja użytkownika końcowego.
 - `PRIVACY.md` — polityka prywatności.
 - `THIRD_PARTY_NOTICES.md` — biblioteki, API i znaki towarowe.

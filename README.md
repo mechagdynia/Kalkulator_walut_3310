@@ -1,43 +1,49 @@
+<div align="right">
+
+**🇬🇧 English** · [🇵🇱 Polski](README.pl.md)
+
+</div>
+
 # Waluta 3310
 
-### Kalkulator i przelicznik walut w dwóch światach: kultowe Retro LCD oraz lekki, kolorowy Modern UI.
+### A currency calculator living in two worlds: iconic Retro LCD and a colorful, modern mobile interface.
 
-**Web · PWA · Android · iOS · 30 walut · tryb offline · bez reklam**
+**Web · PWA · Android · iOS · 30 currencies · offline mode · no ads**
 
-Waluta 3310 łączy pełny kalkulator z jednoczesnym przeliczaniem wielu walut. Aplikacja działa bez konta i własnego backendu, zapamiętuje ostatnie kursy oraz pozwala przełączyć cały interfejs między surową stylistyką retro a współczesnym wyglądem mobilnym.
+Waluta 3310 combines a full calculator with simultaneous multi-currency conversion. It works without an account or a proprietary backend, remembers the latest exchange rates and lets you switch the entire interface between a raw retro display and a polished contemporary design.
 
-## Dlaczego warto
+## Highlights
 
-- Przeliczanie od 2 do 8 walut jednocześnie.
-- 30 popularnych walut z wyszukiwaniem, flagami i symbolami.
-- Kalkulator działań połączony bezpośrednio z kwotą bazową.
-- Dwie zapamiętywane skórki: Retro LCD i Modern UI.
-- Automatyczny wybór waluty lokalnej oraz szybka funkcja SWAP.
-- Cztery źródła kursów z automatycznym przełączeniem awaryjnym.
-- Ostatnie poprawne kursy pozostają dostępne offline wraz z datą aktualizacji.
-- Instalowalna PWA oraz natywne projekty Android i iOS przez Capacitor.
-- Brak reklam, zakupów w aplikacji, kont użytkowników i własnej analityki.
+- Convert between 2 and 8 currencies at the same time.
+- Browse 30 popular currencies with search, flags and symbols.
+- Use a full calculator directly connected to the base amount.
+- Switch between persistent Retro LCD and Modern UI themes.
+- Detect the local currency automatically and change the base with SWAP.
+- Fall back across four exchange-rate providers automatically.
+- Keep the last valid rates available offline with their update date.
+- Install as a PWA or build the native Android and iOS Capacitor projects.
+- No ads, in-app purchases, user accounts or proprietary analytics.
 
-## Bezpieczeństwo i prywatność
+## Security and privacy
 
-- Brak kluczy API, tokenów i sekretów w kodzie aplikacji.
-- Własny parser kalkulatora bez `eval`.
-- Walidacja odpowiedzi API, limit czasu zapytań i restrykcyjna polityka CSP.
-- Produkcyjny build bez map źródłowych; Android korzysta z R8 i zmniejszania zasobów.
-- Zgłoszenie problemu otwiera program pocztowy dopiero po działaniu użytkownika.
+- No API keys, access tokens or secrets in the client application.
+- A dedicated expression parser with no `eval`.
+- API response validation, request timeouts and a restrictive CSP.
+- Production builds have no source maps; Android uses R8 and resource shrinking.
+- Error reporting opens the user's email application only after an explicit action.
 
-Minifikacja utrudnia przypadkowe czytanie paczki, ale nie stanowi kryptograficznej ochrony kodu. Sekretów nie należy umieszczać w zmiennych `VITE_*`.
+Minification discourages casual inspection but is not cryptographic source-code protection. Secrets must never be stored in `VITE_*` variables.
 
-## Uruchomienie lokalne
+## Run locally
 
-Wymagane są Node.js 22+ i npm.
+Node.js 22+ and npm are required.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Produkcja i pełna kontrola jakości:
+Production build and full quality gate:
 
 ```bash
 npm run build
@@ -45,35 +51,35 @@ npm run test:qa
 npm run preview
 ```
 
-## Android i iOS
+## Android and iOS
 
-Projekty natywne znajdują się w katalogach `android/` i `ios/`. Po zmianach warstwy webowej należy je zsynchronizować:
+Native projects are available in `android/` and `ios/`. Synchronize them after changing the web application:
 
 ```bash
 npm run cap:sync
 ```
 
-Android wymaga JDK 21 i Android SDK 36. Kompilacja iOS wymaga macOS, Xcode, CocoaPods oraz aktywnego podpisu Apple Developer. Identyfikator aplikacji to `pl.waluta3310.app`.
+Android requires JDK 21 and Android SDK 36. iOS builds require macOS, Xcode, CocoaPods and an active Apple Developer signing identity. The application identifier is `pl.waluta3310.app`.
 
-## Wydania
+## Releases
 
-Workflow GitHub przygotowuje jedno wydanie zawierające:
+The GitHub workflow prepares one release containing:
 
 - `app-release.apk`
 - `app-release.ipa`
-- automatyczne archiwa kodu źródłowego ZIP i TAR.GZ
+- automatically generated source-code archives in ZIP and TAR.GZ formats
 
-Publikacja zatrzymuje się, gdy brakuje prawdziwych danych podpisujących. Dzięki temu repozytorium nie udostępnia niepodpisanych ani fikcyjnych paczek.
+Publishing stops when genuine signing credentials are unavailable, preventing unsigned or placeholder packages from being released.
 
-## Technologie
+## Technology
 
 React 19 · TypeScript · Vite · Capacitor 8 · Vitest · Testing Library · PWA
 
-## Dokumentacja
+## Documentation
 
-- [Polityka prywatności](PRIVACY.md)
-- [Licencja](LICENSE.md)
-- [Lista publikacji sklepowej](STORE_RELEASE.md)
-- [Informacje o usługach zewnętrznych](THIRD_PARTY_NOTICES.md)
+- [Privacy policy](PRIVACY.md)
+- [License](LICENSE.md)
+- [Store release checklist](STORE_RELEASE.md)
+- [Third-party notices](THIRD_PARTY_NOTICES.md)
 
-Kursy mają charakter informacyjny i mogą być opóźnione. Aplikacja nie udziela porad finansowych.
+Exchange rates are informational and may be delayed. This application does not provide financial advice.
