@@ -61,8 +61,8 @@ button:focus-visible, input:focus-visible { outline: 3px solid #d9f25f; outline-
 .spin { display: inline-block; animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.asset-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; padding: 4px 10px 5px; }
-.asset-tabs button { border: 1px solid rgba(255,255,255,.12); border-radius: 8px; color: #aeb8b0; background: rgba(255,255,255,.035); font: 900 9px/1 "Courier New", monospace; letter-spacing: .12em; cursor: pointer; }
+.asset-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 4px 10px 5px; }
+.asset-tabs button { min-width: 0; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; color: #aeb8b0; background: rgba(255,255,255,.035); font: 900 clamp(7px, 2.2vw, 9px)/1 "Courier New", monospace; letter-spacing: .06em; cursor: pointer; }
 .asset-tabs button.active { border-color: var(--accent); color: var(--accent-ink); background: var(--accent); box-shadow: inset 0 1px rgba(255,255,255,.35); }
 
 .display-stack {

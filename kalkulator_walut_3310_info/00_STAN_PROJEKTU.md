@@ -8,6 +8,7 @@ Ostatnia aktualizacja: 21 sierpnia 2026
 - Powstał kalkulator bez `eval`, multi-przelicznik i wybór od 2 do 8 walut.
 - Dodano 149 walut PLN + NBP A/B, lokalne flagi Flagpedii, formatowanie kwot i zmianę waluty bazowej.
 - Dodano osobną zakładkę z 30 kryptowalutami i publicznymi kursami Coinbase.
+- Dodano trzecią zakładkę Waluty/Krypto: jedna wymienna waluta tradycyjna zawsze na górze oraz 1–7 kryptowalut, z przeliczaniem w obu kierunkach.
 - Dodano polską i angielską wersję interfejsu, automatyczny wybór języka i nazwę `Currency Calculator 3310`.
 - Dodano cztery źródła kursów walut z automatycznym failover i limitem czasu.
 - Dodano pamięć kursów na godzinę oraz użycie starych kursów offline.
@@ -29,7 +30,7 @@ Ostatnia aktualizacja: 21 sierpnia 2026
 - Publiczne API Frankfurter odpowiedziało kodem 200 dla PLN i zwróciło 29 kursów.
 - PWA zwraca kod 200 dla strony, manifestu, service workera i obu ikon PNG.
 - Web build został zsynchronizowany do Androida i iOS.
-- Dodano trwały pakiet Vitest + Testing Library: 6 plików, 63 testy obejmujące także języki, krypto, NBP A+B i Flagpedię.
+- Dodano trwały pakiet Vitest + Testing Library: 6 plików, 66 testów obejmujących także języki, tryb mieszany, krypto, NBP A+B i Flagpedię.
 - Lokalny podgląd produkcyjny działa pod `http://127.0.0.1:4173/`.
 - Dodano workflow jednego GitHub Release z podpisanymi APK/IPA i automatycznymi archiwami źródeł.
 - Utworzono pierwsze publiczne repozytorium konta `mechagdynia` i szkic wydania `v1.0.0`.

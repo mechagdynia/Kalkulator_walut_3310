@@ -40,5 +40,9 @@ export const CRYPTOCURRENCIES: CryptoInfo[] = [
 
 export const DEFAULT_CRYPTOCURRENCIES = ['BTC', 'ETH', 'USDT', 'BNB', 'SOL', 'XRP'];
 
+const CRYPTO_CODES = new Set(CRYPTOCURRENCIES.map((crypto) => crypto.code));
+
+export const isCryptoCode = (code: string): boolean => CRYPTO_CODES.has(code);
+
 export const cryptoByCode = (code: string): CryptoInfo =>
   CRYPTOCURRENCIES.find((crypto) => crypto.code === code) ?? { code, name: code, symbol: code, color: '#586174' };

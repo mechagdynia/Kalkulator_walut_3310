@@ -1,4 +1,5 @@
-import { CRYPTOCURRENCIES } from '../data/cryptocurrencies';
+import { CURRENCIES } from '../data/currencies';
+import { CRYPTOCURRENCIES, isCryptoCode } from '../data/cryptocurrencies';
 import type { AssetMode, RateSnapshot } from '../types/currency';
 import { readStorage, writeStorage } from './storage';
 
@@ -6,6 +7,8 @@ const FIAT_CACHE_TTL = 60 * 60 * 1000;
 const CRYPTO_CACHE_TTL = 5 * 60 * 1000;
 const SUPPORTED_CODE = /^[A-Z0-9]{2,10}$/;
 const FIAT_CODE = /^[A-Z]{3}$/;
+const FIAT_CODES = new Set(CURRENCIES.map((currency) => currency.code));
+const CRYPTO_CODES = new Set(CRYPTOCURRENCIES.map((crypto) => crypto.code));
 
 const withTimeout = async (url: string, init: RequestInit = {}, timeout = 2800): Promise<Response> => {
   const controller = new AbortController();
@@ -68,29 +71,70 @@ async function fromNbp(base: string): Promise<RateSnapshot> {
   return { base, rates: validateRates(rates, base), fetchedAt: Date.now(), source: 'NBP A+B', stale: false };
 }
 
-async function fromCoinbase(base: string): Promise<RateSnapshot> {
+async function coinbaseRates(base: string): Promise<Record<string, number>> {
   const response = await withTimeout(`https://api.coinbase.com/v2/exchange-rates?currency=${base}`);
   if (!response.ok) throw new Error('Coinbase error');
   const data = await response.json() as { data?: { rates?: Record<string, string> } };
-  const supported = new Set(CRYPTOCURRENCIES.map((crypto) => crypto.code));
   const rates = Object.fromEntries(
     Object.entries(data.data?.rates ?? {})
-      .filter(([code]) => supported.has(code))
-      .map(([code, value]) => [code, Number(value)])
+      .map(([code, value]): [string, number] => [code, Number(value)])
+      .filter(([code, value]) => SUPPORTED_CODE.test(code) && Number.isFinite(value) && value > 0)
   );
+  if (Object.keys(rates).length < 3) throw new Error('Coinbase data error');
+  return rates;
+}
+
+async function fromCoinbase(base: string): Promise<RateSnapshot> {
+  const raw = await coinbaseRates(base);
+  const rates = Object.fromEntries(Object.entries(raw).filter(([code]) => CRYPTO_CODES.has(code)));
   return { base, rates: validateRates(rates, base), fetchedAt: Date.now(), source: 'Coinbase', stale: false };
 }
 
-export async function getRates(base: string, force = false, mode: AssetMode = 'fiat'): Promise<RateSnapshot> {
+async function fromMixed(base: string, fiat: string, force: boolean): Promise<RateSnapshot> {
+  if (!FIAT_CODES.has(fiat) || (!isCryptoCode(base) && base !== fiat)) throw new Error('Nieprawidłowy zestaw mieszany');
+  if (isCryptoCode(base)) {
+    const [raw, fiatSnapshot] = await Promise.all([coinbaseRates(base), getRates('USD', force, 'fiat')]);
+    const fiatPerUsd = fiatSnapshot.rates[fiat];
+    const usdPerBase = raw.USD;
+    if (!fiatPerUsd || !usdPerBase) throw new Error('Brak kursu pośredniego');
+    const cryptoRates = Object.fromEntries(Object.entries(raw).filter(([code]) => CRYPTO_CODES.has(code)));
+    return {
+      base,
+      rates: validateRates({ ...cryptoRates, [fiat]: usdPerBase * fiatPerUsd }, base),
+      fetchedAt: Date.now(),
+      source: `Coinbase + ${fiatSnapshot.source}`,
+      stale: false
+    };
+  }
+  const [raw, fiatSnapshot] = await Promise.all([coinbaseRates('USD'), getRates(fiat, force, 'fiat')]);
+  const usdPerFiat = fiatSnapshot.rates.USD;
+  if (!usdPerFiat) throw new Error('Brak kursu pośredniego');
+  const cryptoRates = Object.fromEntries(
+    Object.entries(raw)
+      .filter(([code]) => CRYPTO_CODES.has(code))
+      .map(([code, value]) => [code, value * usdPerFiat])
+  );
+  return {
+    base,
+    rates: validateRates({ ...cryptoRates, [fiat]: 1 }, base),
+    fetchedAt: Date.now(),
+    source: `Coinbase + ${fiatSnapshot.source}`,
+    stale: false
+  };
+}
+
+export async function getRates(base: string, force = false, mode: AssetMode = 'fiat', mixedFiat = 'USD'): Promise<RateSnapshot> {
   if (!SUPPORTED_CODE.test(base) || (mode === 'fiat' && !FIAT_CODE.test(base))) throw new Error('Nieprawidłowy kod waluty');
-  const cacheKey = `rates:${mode}:${base}`;
+  const cacheKey = mode === 'mixed' ? `rates:${mode}:${base}:${mixedFiat}` : `rates:${mode}:${base}`;
   const cached = readStorage<RateSnapshot | null>(cacheKey, null);
-  const cacheTtl = mode === 'crypto' ? CRYPTO_CACHE_TTL : FIAT_CACHE_TTL;
+  const cacheTtl = mode === 'fiat' ? FIAT_CACHE_TTL : CRYPTO_CACHE_TTL;
   if (!force && cached && Date.now() - cached.fetchedAt < cacheTtl) return { ...cached, stale: false };
 
   const providers: Array<() => Promise<RateSnapshot>> = mode === 'crypto'
     ? [() => fromCoinbase(base)]
-    : [() => fromNbp(base), () => fromFrankfurter(base), () => fromExchangeRateApi(base), () => fromCurrencyApi(base)];
+    : mode === 'mixed'
+      ? [() => fromMixed(base, mixedFiat, force)]
+      : [() => fromNbp(base), () => fromFrankfurter(base), () => fromExchangeRateApi(base), () => fromCurrencyApi(base)];
 
   for (const provider of providers) {
     try {

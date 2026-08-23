@@ -17,6 +17,7 @@ Waluta 3310 łączy pełny kalkulator z jednoczesnym przeliczaniem walut i krypt
 - Przeliczanie od 2 do 8 walut jednocześnie.
 - Wszystkie 149 walut objętych aktualnymi tabelami A i B NBP, z wyszukiwaniem, lokalnymi flagami Flagpedii i symbolami.
 - Osobna zakładka Krypto z 30 popularnymi kryptowalutami i kursami Coinbase.
+- Zakładka Waluty/Krypto utrzymuje jedną wybraną walutę na górze i porównuje ją z 1–7 kryptowalutami w obu kierunkach.
 - Polski i angielski interfejs; pierwszy język jest dobierany z ustawień urządzenia.
 - Kalkulator działań połączony bezpośrednio z kwotą bazową.
 - Dwie zapamiętywane skórki: Retro LCD i Modern UI.
@@ -85,3 +86,5 @@ React 19 · TypeScript · Vite · Capacitor 8 · Vitest · Testing Library · PW
 - [Informacje o usługach zewnętrznych](THIRD_PARTY_NOTICES.md)
 
 Kursy mają charakter informacyjny i mogą być opóźnione. Aplikacja nie udziela porad finansowych.
+
+USDT jest zaprojektowany tak, aby utrzymywać kurs 1:1 względem USD, ale aplikacja zawsze pokazuje aktualny kurs rynkowy i nie zakłada, że oba aktywa mają identyczną wartość.
